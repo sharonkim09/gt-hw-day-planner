@@ -23,17 +23,18 @@ $(document).ready(function () {
     var hourEl = hours[i];
     // time-block & row: each row , need to create variable
     var timeBlocksEl = $("<div class = 'row time-block'>");
-    $(".container").append(timeBlocksEl);
     // hour: leftside , need to create variable
     var hourColEl = $("<div class='hour col-1'>");
-    timeBlocksEl.append(hourColEl);
     //description: text-area , need to create var
-    var hourTask = $("<textarea class= 'description col-md-9'>");
-    var saveButtonEl = $("<button type='button' class= 'saveBtn col-1'>");
+    var hourTask = $("<textarea class= 'description col-9'>");
+    var saveButtonEl = $("<button type='button' id='text-input' class= 'saveBtn col-1'>");
+    //Save icon found class on w3
+    var saveIconEl= $("<i class='fas fa-save'>")
     $(".container").append(timeBlocksEl);
     timeBlocksEl.append(hourColEl).append(hourTask).append(saveButtonEl);
     //show time as hour
     hourColEl.append(hourEl);
+    saveButtonEl.append(saveIconEl);
   
 // text-areas are color-coded based on current time
     // present
@@ -45,7 +46,7 @@ $(document).ready(function () {
       $(timeBlocksEl).addClass("past");
     }
     //future
-    else {
+    else if(hourEl > currentTime) {
       $(timeBlocksEl).addClass("future");
     }
 
@@ -57,5 +58,10 @@ $(document).ready(function () {
   $(".saveBtn").on("click", function (event) {
     // console.log("You clicked button!");
     event.preventDefault();
+    var testInputText = $(".description").val();
+    console.log($(this).find("input"));
+    var storageName = ".description" + $(this).attr("data-id");
+    localStorage.setItem(storageName, $(this).find(".description").val());
   });
+
 });
