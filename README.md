@@ -15,7 +15,7 @@ Create a simple calendar application that allows the user to save events for eac
 2. Open index.html in default browser
 
 ## Usage
-[Deployed Application]
+[Deployed Application](https://sharonkim09.github.io/gt-hw-day-planner/)
 
 The following animation demonstrates the application functionality:
 ![day planner demo](./Assets/images/05-third-party-apis-homework-demo.gif)
