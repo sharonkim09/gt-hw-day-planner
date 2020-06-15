@@ -7,21 +7,20 @@ $(document).ready(function () {
   console.log(currentTime)
   $("#currentDay").append(dayDisplay);
   var hours = [
-    "9AM",
-    "10AM",
-    "11AM",
-    "12AM",
-    "1PM",
-    "2PM",
-    "3PM",
-    "4PM",
-    "5PM",
+    "9 AM",
+    "10 AM",
+    "11 AM",
+    "12 AM",
+    "1 PM",
+    "2 PM",
+    "3 PM",
+    "4 PM",
+    "5 PM",
   ];
   //for loop for making each time slot
   for (var i = 0; i < hours.length; i++) {
     // console.log(hours[i]);
     var hourEl = hours[i];
-    // console.log(hourEl);
     // time-block & row: each row , need to create variable
     var timeBlocksEl = $("<div class = 'row time-block'>");
     $(".container").append(timeBlocksEl);
@@ -35,9 +34,28 @@ $(document).ready(function () {
     timeBlocksEl.append(hourColEl).append(hourTask).append(saveButtonEl);
     //show time as hour
     hourColEl.append(hourEl);
-  }
+  
+// text-areas are color-coded based on current time
+    // present
+    if (hourEl === currentTime) {
+      $(timeBlocksEl).addClass("present");
+    }
+    //past
+    else if (hourEl < currentTime) {
+      $(timeBlocksEl).addClass("past");
+    }
+    //future
+    else {
+      $(timeBlocksEl).addClass("future");
+    }
 
+}
+    //TODO
+    //local storage: get
 
-
-
+  //Event Listener & localStorage set
+  $(".saveBtn").on("click", function (event) {
+    // console.log("You clicked button!");
+    event.preventDefault();
+  });
 });
