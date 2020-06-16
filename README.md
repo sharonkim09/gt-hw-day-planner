@@ -17,6 +17,10 @@ This is a simple calendar application that allows the user to save events for ea
 ## Usage
 [Deployed Application](https://sharonkim09.github.io/gt-hw-day-planner/)
 
+
+The following are screenshots of the planner:
+![Home Screen](./Assets/images/homepage.png)
+![Saving Tasks](./Assets/images/saving.png)
 The following animation demonstrates the application functionality:
 ![day planner demo](./Assets/images/05-third-party-apis-homework-demo.gif)
 
