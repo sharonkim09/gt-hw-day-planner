@@ -2,9 +2,9 @@ $(document).ready(function () {
   // console.log("Hello World!")
   //Display date with moment.js
   var dayDisplay = moment().format("dddd, MMMM Do");
-  //array of hours for time
+  //Display time with moment.js
   var currentTime = moment().format("hA");
-  console.log(currentTime);
+  // console.log(currentTime);
   $("#currentDay").append(dayDisplay);
   //Array of time
   var hours = [
@@ -22,12 +22,9 @@ $(document).ready(function () {
   function generateInput() {
     // console.log(hours[i]);
     var hourEl = hours[i];
-    // time-block & row: each row , need to create variable
     var timeBlocksEl = $(`<div class = "row time-block">`);
-    // timeBlocksEl.attr("id", hours[i])
-    // hour: leftside , need to create variable
-    var hourColEl = $("<div class='hour col-1'>");
-    //description: text-area , need to create var
+    var hourSlotEl = $("<div class='hour col-1'>");
+    //Getting local storage and setting an id of their respective hours index
     var hourTask = $("<textarea class= ' description form col-9'>").attr(
       "id",
       hours[i]
@@ -35,21 +32,22 @@ $(document).ready(function () {
     var saveButtonEl = $(
       "<button type='button' id='text-input' class= 'saveBtn col-1'>"
     );
-    saveButtonEl.attr("data-id", i);
-    //Save icon found class on w3
+    //Save icon class found on w3schools
+    //https://www.w3schools.com/icons/tryit.asp?filename=tryicons_fa-save
     var saveIconEl = $("<i class='fas fa-save'>");
+    //Had to push elements in order or it'll break
     $(".container").append(timeBlocksEl);
-    timeBlocksEl.append(hourColEl).append(hourTask).append(saveButtonEl);
-    //show time as hour
-    hourColEl.append(hourEl);
+    timeBlocksEl.append(hourSlotEl).append(hourlyTask).append(saveButtonEl);
+    //Time shown in each 
+    hourSlotEl.append(hourEl);
     saveButtonEl.append(saveIconEl);
     // text-areas are color-coded based on current time
     if (hourEl === currentTime) {
-      $(hourTask).addClass("present");
+      $(hourlyTask).addClass("present");
     } else if (hourEl < currentTime) {
-      $(hourTask).addClass("past");
+      $(hourlyTask).addClass("past");
     } else if (hourEl > currentTime) {
-      $(hourTask).addClass("future");
+      $(hourlyTask).addClass("future");
     }
   }
   //Function Call
