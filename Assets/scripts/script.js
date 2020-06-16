@@ -6,7 +6,7 @@ $(document).ready(function () {
   var currentTime = moment().format("hA");
   console.log(currentTime);
   $("#currentDay").append(dayDisplay);
-  //Array of time 
+  //Array of time
   var hours = [
     "9 AM",
     "10 AM",
@@ -19,7 +19,7 @@ $(document).ready(function () {
     "5 PM",
   ];
   //Function to dynamically generate elements
-  function generateInput(){
+  function generateInput() {
     // console.log(hours[i]);
     var hourEl = hours[i];
     // time-block & row: each row , need to create variable
@@ -28,7 +28,10 @@ $(document).ready(function () {
     // hour: leftside , need to create variable
     var hourColEl = $("<div class='hour col-1'>");
     //description: text-area , need to create var
-    var hourTask = $("<textarea class= ' description form col-9'>").attr("id",hours[i]);
+    var hourTask = $("<textarea class= ' description form col-9'>").attr(
+      "id",
+      hours[i]
+    ).val(JSON.parse(localStorage.getItem(hours[i])));
     var saveButtonEl = $(
       "<button type='button' id='text-input' class= 'saveBtn col-1'>"
     );
@@ -43,27 +46,26 @@ $(document).ready(function () {
     // text-areas are color-coded based on current time
     if (hourEl === currentTime) {
       $(hourTask).addClass("present");
-    }
-    else if (hourEl < currentTime) {
+    } else if (hourEl < currentTime) {
       $(hourTask).addClass("past");
-    }
-    else if (hourEl > currentTime) {
+    } else if (hourEl > currentTime) {
       $(hourTask).addClass("future");
     }
   }
-  //Function Call 
+  //Function Call
   for (var i = 0; i < hours.length; i++) {
-  generateInput();}
+    generateInput();
+  }
   //Event Listener & localStorage set
   //inspired by morning office hours 6/15
   $(".saveBtn").on("click", function (event) {
     // console.log("You clicked button!");
     event.preventDefault();
     var value = $(this).siblings("textarea").val();
-    var key= $(this).siblings("textarea").attr("id")
+    var key = $(this).siblings("textarea").attr("id");
     console.log(key);
     console.log(value);
-    localStorage.setItem(key,JSON.stringify(value));
-});
-// JSON.parse(localStorage.getItem(hours[i]))
+    localStorage.setItem(key, JSON.stringify(value));
+  });
+  // JSON.parse(localStorage.getItem(hours[i]))
 });
