@@ -25,10 +25,10 @@ $(document).ready(function () {
     var timeBlocksEl = $(`<div class = "row time-block">`);
     var hourSlotEl = $("<div class='hour col-1'>");
     //Getting local storage and setting an id of their respective hours index
-    var hourTask = $("<textarea class= ' description form col-9'>").attr(
-      "id",
-      hours[i]
-    ).val(JSON.parse(localStorage.getItem(hours[i])));
+    var hourlyTask = $("<textarea class= ' description form col-9'>")
+      .attr("id", hours[i])
+      //parse to store string back to object in JSON
+      .val(JSON.parse(localStorage.getItem(hours[i])));
     var saveButtonEl = $(
       "<button type='button' id='text-input' class= 'saveBtn col-1'>"
     );
@@ -38,7 +38,7 @@ $(document).ready(function () {
     //Had to push elements in order or it'll break
     $(".container").append(timeBlocksEl);
     timeBlocksEl.append(hourSlotEl).append(hourlyTask).append(saveButtonEl);
-    //Time shown in each 
+    //Hours array is printed and added save icon to button
     hourSlotEl.append(hourEl);
     saveButtonEl.append(saveIconEl);
     // text-areas are color-coded based on current time
@@ -54,8 +54,9 @@ $(document).ready(function () {
   for (var i = 0; i < hours.length; i++) {
     generateInput();
   }
-  //Event Listener & localStorage set
-  //inspired by morning office hours 6/15
+  //Event Listener
+  //inspired by morning office hours 6/15 and from stackoverflow post https://stackoverflow.com/questions/61583553/how-to-use-jquery-to-save-the-text-on-the-page-even-after-refreshing-it
+  //When user clicks the save button, the value user inputs will be stored. The text will be stored as val while the location of their text(time) will be the key.
   $(".saveBtn").on("click", function (event) {
     // console.log("You clicked button!");
     event.preventDefault();
@@ -63,6 +64,7 @@ $(document).ready(function () {
     var key = $(this).siblings("textarea").attr("id");
     console.log(key);
     console.log(value);
+    //stringify so value can be read as string in JSON
     localStorage.setItem(key, JSON.stringify(value));
   });
   // JSON.parse(localStorage.getItem(hours[i]))
